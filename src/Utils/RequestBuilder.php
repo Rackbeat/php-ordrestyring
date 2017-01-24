@@ -55,6 +55,7 @@ class RequestBuilder
 	/**
 	 * Add includes / relationships
 	 * You can pass in strings, arrays or Illuminate Collections.
+	 * You can also pass in mutiple strings
 	 *
 	 * @param string|array|Collection $relatedModel
 	 *
@@ -78,6 +79,16 @@ class RequestBuilder
 		if ( is_string( $relatedModel ) )
 		{
 			$this->includes[] = $relatedModel;
+		}
+
+		if(func_num_args() > 1)
+		{
+			$numArguments = func_num_args();
+			$arguments = func_get_args();
+
+			for ($i = 1; $i < $numArguments; $i++) {
+				$this->includes[] = func_get_arg($arguments[$i]);
+			}
 		}
 
 		return $this;

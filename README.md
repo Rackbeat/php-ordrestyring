@@ -6,7 +6,7 @@ It's inspired by the Query Builder from Laravel and similar, and uses a nice flu
 ````php
 $ordrestyring->cases()
              ->where('status', 1)
-             ->include('hours')
+             ->with('hours', 'type')
              ->sortDescending()
              ->sortBy('id')
              ->page(4)
@@ -14,7 +14,7 @@ $ordrestyring->cases()
              ->get();
 ````
 
-This will return a ````Illuminate/Collection```` of cases, with related hours, ordered descending by id, and take 15 results from page 4.
+This will return a ````Illuminate/Collection```` of cases, with related hours and type, ordered descending by id, and take 15 results from page 4.
 
 You can also do things like:
 ````php
