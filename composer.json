@@ -1,0 +1,21 @@
+{
+	"name": "lasserafn/php-ordrestyring",
+	"description": "A PHP Api wrapper for Ordrestyring.dk",
+	"type": "library",
+	"require": {
+		"illuminate/support": "^5.3|^5.4",
+		"guzzlehttp/guzzle": "^6.2"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Lasse Rafn",
+			"email": "lasserafn@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"LasseRafn\\Ordrestyring\\": "src/"
+		}
+	}
+}
