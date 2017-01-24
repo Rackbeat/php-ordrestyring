@@ -1,6 +1,7 @@
 <?php namespace LasseRafn\Ordrestyring\Utils;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 class Request extends RequestBuilder
 {
@@ -30,7 +31,10 @@ class Request extends RequestBuilder
 		     ->perPage( 1 )
 		     ->buildRequest();
 
-		$this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		$response = $this->getResponse( function ()
+		{
+			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		} );
 	}
 
 	/**
@@ -44,7 +48,10 @@ class Request extends RequestBuilder
 
 		$this->buildRequest();
 
-		$this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		$response = $this->getResponse( function ()
+		{
+			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		} );
 	}
 
 	/**
@@ -54,7 +61,10 @@ class Request extends RequestBuilder
 	{
 		$this->buildRequest();
 
-		$this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		$response = $this->getResponse( function ()
+		{
+			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		} );
 	}
 
 	/**
@@ -66,6 +76,39 @@ class Request extends RequestBuilder
 	{
 		$this->buildRequest();
 
-		$this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		$response = $this->getResponse( function ()
+		{
+			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+		} );
+	}
+
+	public function create( $data )
+	{
+
+	}
+
+	public function update( $primaryKey, $data )
+	{
+
+	}
+
+	public function delete( $primaryKey )
+	{
+
+	}
+
+	private function getResponse( callable $callable )
+	{
+//		try {
+			return $callable();
+//		}
+//		catch( ClientException $clientException)
+//		{
+//			return false;
+//		}
+//		catch(\Exception $exception)
+//		{
+//			return false;
+//		}
 	}
 }
