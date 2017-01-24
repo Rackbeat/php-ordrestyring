@@ -84,6 +84,7 @@ class Request extends RequestBuilder
 
 	private function getResponse( callable $callable )
 	{
+		// Todo exception handling
 //		try {
 			return $callable();
 //		}
