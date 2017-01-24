@@ -4,7 +4,14 @@ Framework agnostic. As it should be.
 It's inspired by the Query Builder from Laravel and similar, and uses a nice fluent syntax. Example: 
 
 ````php
-$ordrestyring->cases()->where('status', 1)->include('hours')->sortDescending()->sortBy('id')->page(4)->perPage(15)->get();
+$ordrestyring->cases()
+             ->where('status', 1)
+             ->include('hours')
+             ->sortDescending()
+             ->sortBy('id')
+             ->page(4)
+             ->perPage(15)
+             ->get();
 ````
 
 This will return a ````Illuminate/Collection```` of cases, with related hours, ordered descending by id, and take 15 results from page 4.
