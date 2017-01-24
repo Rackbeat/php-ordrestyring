@@ -25,3 +25,26 @@ $ordrestyring->departments()->where('number', '!=', 19)->all();
 ````php
 $ordrestyring->debtors()->where('id', [1,2,3,4])->get(); // Will get debtors with id 1, 2, 3 and/or 4
 ````
+
+# Installation
+````bash
+composer require lasserafn/php-ordrestyring
+````
+
+# Usage
+````php
+$ordrestyring = new LasseRafn\Ordrestyring\Ordrestyring('API-KEY');
+
+$ordrestyring->cases()->get();
+````
+
+You'd probably want to add a use statement instead:
+````php
+use LasseRafn\Ordrestyring\Ordrestyring;
+
+...
+
+$ordrestyring = new Ordrestyring('API-KEY');
+
+$ordrestyring->cases()->get();
+````
