@@ -5,12 +5,12 @@ It's inspired by the Query Builder from Laravel and similar, and uses a nice flu
 
 ````php
 $ordrestyring->cases()
-             ->where('status', 1)
              ->with('hours', 'type')
+             ->where('status', 1)
              ->sortDescending()
              ->sortBy('id')
-             ->page(4)
              ->perPage(15)
+             ->page(4)
              ->get();
 ````
 
