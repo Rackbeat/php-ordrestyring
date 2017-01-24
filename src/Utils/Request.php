@@ -82,21 +82,6 @@ class Request extends RequestBuilder
 		} );
 	}
 
-	public function create( $data )
-	{
-
-	}
-
-	public function update( $primaryKey, $data )
-	{
-
-	}
-
-	public function delete( $primaryKey )
-	{
-
-	}
-
 	private function getResponse( callable $callable )
 	{
 //		try {
