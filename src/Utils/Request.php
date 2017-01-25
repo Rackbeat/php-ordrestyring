@@ -3,6 +3,7 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Collection;
 use LasseRafn\Ordrestyring\Exceptions\RequestException;
 
 class Request extends RequestBuilder
@@ -16,6 +17,9 @@ class Request extends RequestBuilder
 	/** @var string */
 	protected $endpoint = '';
 
+	/** @var Model */
+	protected $modelClass;
+
 	public function __construct( Client $client )
 	{
 		$this->client = $client;
@@ -25,6 +29,8 @@ class Request extends RequestBuilder
 	 * Find one entity by the primary key
 	 *
 	 * @param int $id
+	 *
+	 * @return Model|null
 	 */
 	public function find( int $id )
 	{
@@ -37,10 +43,19 @@ class Request extends RequestBuilder
 		{
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
+
+		if( count($response) === 0)
+		{
+			return null;
+		}
+
+		return new $this->modelClass($response[0]);
 	}
 
 	/**
 	 * Get the first entity based on the query
+	 *
+	 * @return Model|null
 	 */
 	public function first()
 	{
@@ -50,31 +65,46 @@ class Request extends RequestBuilder
 
 		$this->buildRequest();
 
+		/** @var array $response */
 		$response = $this->getResponse( function ()
 		{
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
+
+		if( count($response) === 0)
+		{
+			return null;
+		}
+
+		return new $this->modelClass($response[0]);
 	}
 
 	/**
 	 * Get a collection of entities based on the query
+	 *
+	 * @return Collection
 	 */
 	public function get()
 	{
 		$this->buildRequest();
 
+		/** @var array $response */
 		$response = $this->getResponse( function ()
 		{
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
 
-		return $response;
+		$items = collect($response);
+
+		return $items->map(function($item) { return new $this->modelClass($item); });
 	}
 
 	/**
 	 * Get a collection of all entities based on a query
 	 * This method will automatically paginate all rows,
 	 * and bypass any page attribute that has been set.
+	 *
+	 * @return Collection
 	 */
 	public function all()
 	{
@@ -84,6 +114,10 @@ class Request extends RequestBuilder
 		{
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
+
+		$items = collect($response);
+
+		return $items->map(function($item) { return new $this->modelClass($item); });
 	}
 
 	private function getResponse( callable $callable )

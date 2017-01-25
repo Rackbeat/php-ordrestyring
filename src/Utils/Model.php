@@ -5,16 +5,17 @@ use Illuminate\Support\Collection;
 
 class Model
 {
-	protected $fillable   = [];
-	protected $endpoint   = '/';
-	protected $primaryKey = 'id';
+	protected $fillable = [];
+
+	const ENDPOINT    = '/';
+	const PRIMARY_KEY = '/';
 
 	/**
 	 * @param null|array|Collection|\stdClass $data
 	 */
 	public function __construct( $data )
 	{
-		if( $data === null)
+		if ( $data === null )
 		{
 			return;
 		}
