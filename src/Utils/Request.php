@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Response;
 
 class Request extends RequestBuilder
 {
@@ -65,6 +66,8 @@ class Request extends RequestBuilder
 		{
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
+
+		return $response;
 	}
 
 	/**
@@ -86,7 +89,10 @@ class Request extends RequestBuilder
 	{
 		// Todo exception handling
 //		try {
-			return $callable();
+			/** @var Response $response */
+			$response = $callable();
+
+			return json_decode($response->getBody()->getContents());
 //		}
 //		catch( ClientException $clientException)
 //		{

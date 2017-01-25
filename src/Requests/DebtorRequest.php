@@ -7,4 +7,7 @@ use LasseRafn\Ordrestyring\Utils\RequestExtensions\CanUpdate;
 class DebtorRequest extends Request
 {
 	use CanUpdate, CanCreate;
+
+	protected $endpoint   = '/debtors';
+	protected $primaryKey = 'customer_number';
 }
