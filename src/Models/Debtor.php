@@ -1,9 +1,6 @@
-<?php
+<?php namespace LasseRafn\Ordrestyring\Models;
 
-
-namespace LasseRafn\Ordrestyring\Models;
-
-
+use LasseRafn\Ordrestyring\Exceptions\RequestException;
 use LasseRafn\Ordrestyring\Utils\Model;
 
 class Debtor extends Model
@@ -53,6 +50,46 @@ class Debtor extends Model
 		'invoice_countrycode'
 	];
 
+	public $due_dates;
+	public $status;
+	public $customer_name;
+	public $customer_attention;
+	public $customer_address;
+	public $customer_postalcode;
+	public $customer_city;
+	public $customer_telephone;
+	public $customer_email;
+	public $customer_mobile;
+	public $invoice_name;
+	public $invoice_address;
+	public $invoice_postalcode;
+	public $invoice_city;
+	public $invoice_telephone;
+	public $invoice_email;
+	public $invoice_mobile;
+	public $cvr;
+	public $ean;
+	public $customer_remarks;
+	public $customer_number;
+	public $invoice_attention;
+	public $avance_type;
+	public $updated_at;
+	public $is_blocked;
+	public $created_at;
+	public $pdf_layout_id;
+	public $billy_handle;
+	public $dinero_handle;
+	public $internal_remark;
+	public $currency_id;
+	public $fortnox_handle;
+	public $fortnox_delivery_address_id;
+	public $invoice_social_security_number;
+	public $invoice_property_designation;
+	public $invoice_residence_association_organisation_number;
+	public $visma_handle;
+	public $termsofpayment_id;
+	public $invoice_countrycode;
+
 	protected $casts = [
 		'customer_number' => 'int',
 		'is_blocked'      => 'bool',
@@ -62,6 +99,12 @@ class Debtor extends Model
 
 	public function setTermsofpaymentIdAttribute( $id )
 	{
-		return ( new TermsOfPaymentRequest( $this->client ) )->find( $id );
+		try
+		{
+			return ( new TermsOfPaymentRequest( $this->client ) )->find( $id );
+		} catch ( RequestException $requestException )
+		{
+			return null;
+		}
 	}
 }
