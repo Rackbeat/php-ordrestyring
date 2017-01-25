@@ -14,7 +14,7 @@ $ordrestyring->cases()
              ->get();
 ````
 
-This will return a ````Illuminate/Collection```` of cases, with related hours and type, ordered descending by id, and take 15 results from page 4.
+This will return a ``Illuminate/Collection`` of cases, with related hours and type, ordered descending by id, and take 15 results from page 4.
 
 You can also do things like:
 ````php
@@ -48,10 +48,18 @@ $ordrestyring->cases()->get();
 You'd probably want to add a use statement instead:
 ````php
 use LasseRafn\Ordrestyring\Ordrestyring;
-
-...
-
-$ordrestyring = new Ordrestyring('API-KEY');
-
-$ordrestyring->cases()->get();
 ````
+
+## Exceptions
+All request exceptions will throw an exception, which extends ``GuzzleHttp\Exception\ClientException``. The returned exception is ``LasseRafn\Ordrestyring\Exceptions\RequestException`` and will get the error message from Ordrestyring if one is present, and default to the ClientException message if none is present. So handling exceptions can be as simple as:
+
+````php
+try {
+    // try to get something from the api, but nothing is found.
+}
+catch( LasseRafn\Ordrestyring\Exceptions\RequestException $exception ) {
+    echo $exception->message; // could redirect back with the message.
+}
+````
+
+Would echo out something like: "This item does not exists" (according to their API)
