@@ -34,22 +34,17 @@ class Request extends RequestBuilder
 	 */
 	public function find( int $id )
 	{
-		$this->where( $this->primaryKey, $id )
-		     ->page( 1 )
-		     ->perPage( 1 )
-		     ->buildRequest();
-
-		$response = $this->getResponse( function ()
+		$response = $this->getResponse( function () use ( $id )
 		{
-			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
+			return $this->client->get( "{$this->endpoint}/{$id}" );
 		} );
 
-		if( count($response) === 0)
+		if ( count( $response ) === 0 )
 		{
 			return null;
 		}
 
-		return new $this->modelClass($response[0]);
+		return new $this->modelClass( $response[0] );
 	}
 
 	/**
@@ -71,12 +66,12 @@ class Request extends RequestBuilder
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
 
-		if( count($response) === 0)
+		if ( count( $response ) === 0 )
 		{
 			return null;
 		}
 
-		return new $this->modelClass($response[0]);
+		return new $this->modelClass( $response[0] );
 	}
 
 	/**
@@ -94,9 +89,12 @@ class Request extends RequestBuilder
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
 
-		$items = collect($response);
+		$items = collect( $response );
 
-		return $items->map(function($item) { return new $this->modelClass($item); });
+		return $items->map( function ( $item )
+		{
+			return new $this->modelClass( $item );
+		} );
 	}
 
 	/**
@@ -115,9 +113,12 @@ class Request extends RequestBuilder
 			return $this->client->get( "{$this->endpoint}{$this->urlParameters}" );
 		} );
 
-		$items = collect($response);
+		$items = collect( $response );
 
-		return $items->map(function($item) { return new $this->modelClass($item); });
+		return $items->map( function ( $item )
+		{
+			return new $this->modelClass( $item );
+		} );
 	}
 
 	private function getResponse( callable $callable )
@@ -130,7 +131,9 @@ class Request extends RequestBuilder
 			return json_decode( $response->getBody()->getContents() );
 		} catch ( ClientException $clientException )
 		{
-			throw new RequestException( $clientException->hasResponse() ? json_decode($clientException->getResponse()->getBody()->getContents())->message : $clientException->getMessage(),
+			throw new RequestException( $clientException->hasResponse() ? json_decode( $clientException->getResponse()
+			                                                                                           ->getBody()
+			                                                                                           ->getContents() )->message : $clientException->getMessage(),
 				$clientException->getRequest(),
 				$clientException->getResponse(),
 				$clientException->getPrevious(),
