@@ -39,7 +39,7 @@ class Request extends RequestBuilder
 			return $this->client->get( "{$this->endpoint}/{$id}" );
 		} );
 
-		return new $this->modelClass( $response );
+		return new $this->modelClass( $this->client, $response );
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Request extends RequestBuilder
 			return null;
 		}
 
-		return new $this->modelClass( $response[0] );
+		return new $this->modelClass( $this->client, $response[0] );
 	}
 
 	/**
@@ -88,7 +88,7 @@ class Request extends RequestBuilder
 
 		return $items->map( function ( $item )
 		{
-			return new $this->modelClass( $item );
+			return new $this->modelClass( $this->client, $item );
 		} );
 	}
 
@@ -112,7 +112,7 @@ class Request extends RequestBuilder
 
 		return $items->map( function ( $item )
 		{
-			return new $this->modelClass( $item );
+			return new $this->modelClass( $this->client, $item );
 		} );
 	}
 
