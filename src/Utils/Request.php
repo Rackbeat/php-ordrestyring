@@ -116,7 +116,7 @@ class Request extends RequestBuilder
 		} );
 	}
 
-	private function getResponse( callable $callable )
+	protected function getResponse( callable $callable )
 	{
 		try
 		{
