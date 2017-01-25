@@ -39,12 +39,7 @@ class Request extends RequestBuilder
 			return $this->client->get( "{$this->endpoint}/{$id}" );
 		} );
 
-		if ( count( $response ) === 0 )
-		{
-			return null;
-		}
-
-		return new $this->modelClass( $response[0] );
+		return new $this->modelClass( $response );
 	}
 
 	/**
