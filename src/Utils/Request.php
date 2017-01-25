@@ -3,6 +3,7 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
+use LasseRafn\Ordrestyring\Exceptions\RequestException;
 
 class Request extends RequestBuilder
 {
@@ -87,20 +88,19 @@ class Request extends RequestBuilder
 
 	private function getResponse( callable $callable )
 	{
-		// Todo exception handling
-//		try {
+		try
+		{
 			/** @var Response $response */
 			$response = $callable();
 
-			return json_decode($response->getBody()->getContents());
-//		}
-//		catch( ClientException $clientException)
-//		{
-//			return false;
-//		}
-//		catch(\Exception $exception)
-//		{
-//			return false;
-//		}
+			return json_decode( $response->getBody()->getContents() );
+		} catch ( ClientException $clientException )
+		{
+			throw new RequestException( $clientException->hasResponse() ? json_decode($clientException->getResponse()->getBody()->getContents())->message : $clientException->getMessage(),
+				$clientException->getRequest(),
+				$clientException->getResponse(),
+				$clientException->getPrevious(),
+				$clientException->getHandlerContext() );
+		}
 	}
 }

@@ -8,6 +8,6 @@ class DebtorRequest extends Request
 {
 	use CanUpdate, CanCreate;
 
-	protected $endpoint   = '/debtors';
+	protected $endpoint   = '/debtasdors';
 	protected $primaryKey = 'customer_number';
 }
