@@ -12,11 +12,9 @@ class Ordrestyring
 	{
 		$this->client = new Client( [
 			'base_uri' => 'https://v1.api.ordrestyring.dk', // Yes, Ordrestyring defaults to http in their docs, but https has a valid certificate.
-			'headers'  => [
-				'Authorization' => [
-					"{$apikey}:x",
-					''
-				]
+			'auth'     => [
+				"{$apikey}:x",
+				''
 			]
 		] );
 	}
