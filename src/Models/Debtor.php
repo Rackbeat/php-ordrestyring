@@ -90,6 +90,9 @@ class Debtor extends Model
 	public $termsofpayment_id;
 	public $invoice_countrycode;
 
+	/** @var null|TODO type */
+	public $termsOfPayment;
+
 	protected $casts = [
 		'customer_number' => 'int',
 		'is_blocked'      => 'bool',
@@ -101,10 +104,12 @@ class Debtor extends Model
 	{
 		try
 		{
-			return ( new TermsOfPaymentRequest( $this->client ) )->find( $id );
+			$this->termsOfPayment = ( new TermsOfPaymentRequest( $this->client ) )->find( $id );
 		} catch ( RequestException $requestException )
 		{
-			return null;
+			$this->termsOfPayment = null;
 		}
+
+		return $id;
 	}
 }
