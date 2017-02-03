@@ -46,7 +46,7 @@ trait SetsAttributes
 
 			case 'bool':
 			case 'boolean':
-				return (bool) $value;
+				return (bool) (is_int($value) ? $value === 1 : $value);
 
 			default:
 			case 'string':

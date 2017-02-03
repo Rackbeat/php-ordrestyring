@@ -1,6 +1,7 @@
 <?php namespace LasseRafn\Ordrestyring;
 
 use GuzzleHttp\Client;
+use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 
 class Ordrestyring
@@ -66,6 +67,7 @@ class Ordrestyring
 
 	public function cases()
 	{
+		return new CaseItemRequest( $this->client );
 	}
 
 	public function caseStatuses()

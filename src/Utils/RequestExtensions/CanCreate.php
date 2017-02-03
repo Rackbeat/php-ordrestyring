@@ -4,9 +4,11 @@ trait CanCreate
 {
 	public function create( $data )
 	{
-		$response = $this->getResponse( function ()
+		$response = $this->getResponse( function () use ( $data )
 		{
-			return $this->client->post( "{$this->endpoint}" );
+			return $this->client->post( "{$this->endpoint}", [
+				'json' => $data
+			] );
 		} );
 	}
 }
