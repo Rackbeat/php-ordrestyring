@@ -1,12 +1,18 @@
 <?php namespace LasseRafn\Ordrestyring\Models;
 
 use LasseRafn\Ordrestyring\Exceptions\RequestException;
+use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
+use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 use LasseRafn\Ordrestyring\Utils\Model;
+use LasseRafn\Ordrestyring\Utils\ModelTraits\CanUpdate;
 
 class CaseItem extends Model
 {
+	use CanUpdate;
+
 	const ENDPOINT    = '/cases';
 	const PRIMARY_KEY = 'case_number';
+	const REQUEST_CLASS = CaseItemRequest::class;
 
 	protected $fillable = [
 		'ourref',
@@ -126,7 +132,7 @@ class CaseItem extends Model
 	public $is_jublo_case;
 	public $customer_id;
 
-	/** @var null|TODO type */
+	/** @var Debtor */
 	public $customer;
 
 	protected $casts = [
@@ -141,12 +147,23 @@ class CaseItem extends Model
 	{
 		try
 		{
-			$this->customer = ( new CustomerRequest( $this->client ) )->find( $id );
+			$this->customer = ( new DebtorRequest( $this->client ) )->find( $id );
 		} catch ( RequestException $requestException )
 		{
 			$this->customer = null;
 		}
 
 		return $id;
+	}
+
+	public function setStatus( int $statusId )
+	{
+		$this->update([
+			'status' => $statusId
+		]);
+
+		$this->status = $statusId;
+
+		return $this;
 	}
 }

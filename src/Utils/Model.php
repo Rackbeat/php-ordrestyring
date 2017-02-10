@@ -11,11 +11,12 @@ class Model
 	protected $client;
 	protected $fillable = [];
 
-	const ENDPOINT    = '/';
-	const PRIMARY_KEY = '/';
+	const ENDPOINT      = '/';
+	const PRIMARY_KEY   = '/';
+	const REQUEST_CLASS = Request::class;
 
 	/**
-	 * @param Client $client
+	 * @param Client                          $client
 	 * @param null|array|Collection|\stdClass $data
 	 */
 	public function __construct( Client $client, $data )
@@ -41,7 +42,7 @@ class Model
 		{
 			if ( in_array( (string) $key, $this->fillable, true ) )
 			{
-				$this->setAttribute($key, $attribute);
+				$this->setAttribute( $key, $attribute );
 			}
 		} );
 	}

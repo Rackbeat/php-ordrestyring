@@ -81,13 +81,14 @@ class RequestBuilder
 			$this->includes[] = $relatedModel;
 		}
 
-		if(func_num_args() > 1)
+		if ( func_num_args() > 1 )
 		{
 			$numArguments = func_num_args();
-			$arguments = func_get_args();
+			$arguments    = func_get_args();
 
-			for ($i = 1; $i < $numArguments; $i++) {
-				$this->includes[] = func_get_arg($arguments[$i]);
+			for ( $i = 1; $i < $numArguments; $i ++ )
+			{
+				$this->includes[] = func_get_arg( $arguments[ $i ] );
 			}
 		}
 
@@ -143,6 +144,19 @@ class RequestBuilder
 		}
 
 		return $this;
+	}
+
+	/**
+	 * A shortcut for doing a whereIn query
+	 *
+	 * @param       $column
+	 * @param array $array
+	 *
+	 * @return RequestBuilder
+	 */
+	public function whereIn( $column, array $array ): self
+	{
+		return $this->where( $column, 'in', $array );
 	}
 
 	/**

@@ -1,12 +1,13 @@
 <?php namespace LasseRafn\Ordrestyring\Models;
 
-use LasseRafn\Ordrestyring\Exceptions\RequestException;
+use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 use LasseRafn\Ordrestyring\Utils\Model;
 
 class Debtor extends Model
 {
 	const ENDPOINT    = '/debtors';
 	const PRIMARY_KEY = 'customer_number';
+	const REQUEST_CLASS = DebtorRequest::class;
 
 	protected $fillable = [
 		'due_dates',
@@ -100,7 +101,7 @@ class Debtor extends Model
 		'created_at'      => 'datetime'
 	];
 
-	public function setTermsofpaymentIdAttribute( $id )
+	/*public function setTermsofpaymentIdAttribute( $id )
 	{
 		try
 		{
@@ -111,5 +112,5 @@ class Debtor extends Model
 		}
 
 		return $id;
-	}
+	}*/
 }
