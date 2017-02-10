@@ -71,7 +71,7 @@ class CaseItem extends Model
 		'offer_rek',
 		'offer_remark',
 		'is_jublo_case',
-		'customer_id',
+		'customer_number',
 	];
 
 	public $ourref;
@@ -130,7 +130,7 @@ class CaseItem extends Model
 	public $offer_rek;
 	public $offer_remark;
 	public $is_jublo_case;
-	public $customer_id;
+	public $customer_number;
 
 	/** @var Debtor */
 	public $customer;
@@ -143,11 +143,11 @@ class CaseItem extends Model
 		'created_at'    => 'datetime'
 	];
 
-	public function setCustomerIdAttribute( $id )
+	public function setCustomerNumberAttribute( $number )
 	{
 		try
 		{
-			$this->customer = ( new DebtorRequest( $this->client ) )->find( $id );
+			$this->customer = ( new DebtorRequest( $this->client ) )->find( $number );
 		} catch ( RequestException $requestException )
 		{
 			$this->customer = null;
