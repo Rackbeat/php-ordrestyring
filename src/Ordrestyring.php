@@ -12,7 +12,7 @@ class Ordrestyring
 	public function __construct( string $apikey = '' )
 	{
 		$this->client = new Client( [
-			'base_uri' => 'https://v1.api.ordrestyring.dk', // Yes, Ordrestyring defaults to http in their docs, but https has a valid certificate.
+			'base_uri' => 'https://v2.api.ordrestyring.dk', // Yes, Ordrestyring defaults to http in their docs, but https has a valid certificate.
 			'auth'     => [
 				"{$apikey}:x",
 				''
