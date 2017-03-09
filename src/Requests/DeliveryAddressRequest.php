@@ -6,8 +6,6 @@ use LasseRafn\Ordrestyring\Utils\Request;
 
 class DeliveryAddressRequest extends Request
 {
-	use CanUpdate, CanCreate;
-
 	protected $modelClass = DeliveryAddress::class;
 
 	public function __construct( Client $client )
