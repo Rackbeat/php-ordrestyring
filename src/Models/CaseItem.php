@@ -166,4 +166,40 @@ class CaseItem extends Model
 
 		return $this;
 	}
+	
+	
+	public function uploadDocumentation( $base64File, $type, $name, $description, $owner )
+	{
+		$pdf_decoded = base64_decode( $base64File );
+
+		return $this->client->post( '/case-documentation', [
+			'multipart' => [
+				[
+					'name'     => 'file',
+					'contents' => $pdf_decoded,
+					'filename' => $name
+				],
+				[
+					'name'     => 'case_number',
+					'contents' => $this->case_number
+				],
+				[
+					'name'     => 'description',
+					'contents' => $description
+				],
+				[
+					'name'     => 'filetype',
+					'contents' => $type
+				],
+				[
+					'name'     => 'filename',
+					'contents' => $name
+				],
+				[
+					'name'     => 'owner',
+					'contents' => $owner
+				]
+			]
+		] );
+	}
 }
