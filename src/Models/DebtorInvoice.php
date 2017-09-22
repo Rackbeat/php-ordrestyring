@@ -54,4 +54,9 @@ class DebtorInvoice extends Model
 		'updated_at'      => 'datetime',
 		'created_at'      => 'datetime'
 	];
+
+	public function getPdf()
+	{
+		return $this->client->get( self::ENDPOINT + '/' . $this->{self::PRIMARY_KEY} . '.pdf' );
+	}
 }
