@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
+use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 
 class Ordrestyring
@@ -27,6 +28,7 @@ class Ordrestyring
 
 	public function debtorInvoices()
 	{
+		return new DebtorInvoiceRequest( $this->client );
 	}
 
 	public function creditors()
