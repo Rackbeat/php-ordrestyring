@@ -9,22 +9,6 @@ class DeliveryAddress extends Model
 	const PRIMARY_KEY   = 'id';
 	const REQUEST_CLASS = DeliveryAddressRequest::class;
 
-	protected $fillable = [
-		'id',
-		'name',
-		'address',
-		'city',
-		'postalcode',
-		'telephone',
-		'mobile',
-		'att',
-		'ean',
-		'email',
-		'updated_at',
-		'created_at',
-		'customer_number'
-	];
-
 	public $id;
 	public $name;
 	public $address;

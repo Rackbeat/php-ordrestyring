@@ -1,6 +1,5 @@
 <?php namespace LasseRafn\Ordrestyring\Models;
 
-use LasseRafn\Ordrestyring\Exceptions\RequestException;
 use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 use LasseRafn\Ordrestyring\Utils\Model;
@@ -10,69 +9,9 @@ class CaseItem extends Model
 {
 	use CanUpdate;
 
-	const ENDPOINT    = '/cases';
-	const PRIMARY_KEY = 'case_number';
+	const ENDPOINT      = '/cases';
+	const PRIMARY_KEY   = 'case_number';
 	const REQUEST_CLASS = CaseItemRequest::class;
-
-	protected $fillable = [
-		'ourref',
-		'requestor',
-		'creation_date',
-		'error_type',
-		'description',
-		'main_technician',
-		'status',
-		'scanstatus',
-		'made_by',
-		'perform_time_from',
-		'perform_time_to',
-		'repeat',
-		'repeat_value',
-		'repeat_type',
-		'repeat_timestamp',
-		'offer_number',
-		'additional_technicians',
-		'remarks',
-		'work_done',
-		'delivery_address',
-		'contact',
-		'case_type',
-		'est_hours',
-		'est_materials',
-		'est_cost_hours',
-		'est_cost_materials',
-		'department',
-		'is_service',
-		'no_materials',
-		'budget_lock',
-		'budget_cost',
-		'budget_sale',
-		'reviewed_budget_cost',
-		'reviewed_budget_sale',
-		'budget_hour_cost',
-		'budget_hour_sale',
-		'reviewed_budget_hour_cost',
-		'reviewed_budget_hour_sale',
-		'case_number',
-		'hmn',
-		'sub_number',
-		'upper_case',
-		'upper_case_number',
-		'hmn_report_number',
-		'hmn_customer_number',
-		'eco_handle',
-		'updated_at',
-		'created_at',
-		'asset_id',
-		'service_id',
-		'offer_blob_hash',
-		'offer_description',
-		'offer_ref',
-		'offer_rek',
-		'offer_remark',
-		'is_jublo_case',
-		'customer_number',
-	];
 
 	public $ourref;
 	public $requestor;
@@ -143,31 +82,23 @@ class CaseItem extends Model
 		'created_at'    => 'datetime'
 	];
 
-	public function setCustomerNumberAttribute( $number )
+	public function getCustomer( $number )
 	{
-		try
-		{
-			$this->customer = ( new DebtorRequest( $this->client ) )->find( $number );
-		} catch ( RequestException $requestException )
-		{
-			$this->customer = null;
-		}
-
-		return $id;
+		return ( new DebtorRequest( $this->client ) )->find( $number );
 	}
 
 	public function setStatus( int $statusId )
 	{
-		$this->update([
+		$this->update( [
 			'status' => $statusId
-		]);
+		] );
 
 		$this->status = $statusId;
 
 		return $this;
 	}
-	
-	
+
+
 	public function uploadDocumentation( $base64File, $type, $name, $description, $owner )
 	{
 		$pdf_decoded = base64_decode( $base64File );

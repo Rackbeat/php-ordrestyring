@@ -9,7 +9,6 @@ class Model
 	use SetsAttributes;
 
 	protected $client;
-	protected $fillable = [];
 
 	const ENDPOINT      = '/';
 	const PRIMARY_KEY   = '/';
