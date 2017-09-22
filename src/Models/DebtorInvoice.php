@@ -59,6 +59,6 @@ class DebtorInvoice extends Model
 
     public function getPdf()
     {
-        return $this->client->get(self::ENDPOINT + '/'.$this->{self::PRIMARY_KEY}.'.pdf');
+        return $this->client->get(self::ENDPOINT + '/'.$this->{self::PRIMARY_KEY}.'.pdf')->getBody()->getContents();
     }
 }
