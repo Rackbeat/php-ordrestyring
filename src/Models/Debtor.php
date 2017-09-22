@@ -48,8 +48,6 @@ class Debtor extends Model
 	public $visma_handle;
 	public $termsofpayment_id;
 	public $invoice_countrycode;
-
-	/** @var null|TODO type */
 	public $termsOfPayment;
 
 	protected $casts = [
@@ -58,17 +56,4 @@ class Debtor extends Model
 		'updated_at'      => 'datetime',
 		'created_at'      => 'datetime'
 	];
-
-	/*public function setTermsofpaymentIdAttribute( $id )
-	{
-		try
-		{
-			$this->termsOfPayment = ( new TermsOfPaymentRequest( $this->client ) )->find( $id );
-		} catch ( RequestException $requestException )
-		{
-			$this->termsOfPayment = null;
-		}
-
-		return $id;
-	}*/
 }
