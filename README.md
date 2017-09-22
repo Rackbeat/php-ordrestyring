@@ -44,6 +44,7 @@ $ordrestyring->debtors()->where('id', [1,2,3,4])->get(); // Will get debtors wit
 ````
 
 ## Installation
+
 ````bash
 composer require lasserafn/php-ordrestyring
 ````
@@ -64,6 +65,7 @@ use LasseRafn\Ordrestyring\Ordrestyring;
 ````
 
 ## Exceptions
+
 All request exceptions will throw an exception, which extends ``GuzzleHttp\Exception\ClientException``. The returned exception is ``LasseRafn\Ordrestyring\Exceptions\RequestException`` and will get the error message from Ordrestyring if one is present, and default to the ClientException message if none is present. So handling exceptions can be as simple as:
 
 ````php
@@ -76,3 +78,15 @@ catch( LasseRafn\Ordrestyring\Exceptions\RequestException $exception ) {
 ````
 
 Would echo out something like: "This item does not exists" (according to their API)
+
+## Supported endpoints
+
+- Debtors
+- Debtor Invoices
+- Delivery Addresses
+- Cases
+- _More to come..._
+
+## Tests
+
+Tests are in the making...
