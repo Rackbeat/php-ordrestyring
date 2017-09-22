@@ -24,8 +24,8 @@ class DeliveryAddress extends Model
 	public $customer_number;
 
 	protected $casts = [
-		'id' => 'int',
-		'updated_at'      => 'datetime',
-		'created_at'      => 'datetime'
+		'id'         => 'int',
+		'updated_at' => 'datetime',
+		'created_at' => 'datetime'
 	];
 }

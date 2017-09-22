@@ -5,8 +5,8 @@ use LasseRafn\Ordrestyring\Utils\Model;
 
 class Debtor extends Model
 {
-	const ENDPOINT    = '/debtors';
-	const PRIMARY_KEY = 'customer_number';
+	const ENDPOINT      = '/debtors';
+	const PRIMARY_KEY   = 'customer_number';
 	const REQUEST_CLASS = DebtorRequest::class;
 
 	public $due_dates;
