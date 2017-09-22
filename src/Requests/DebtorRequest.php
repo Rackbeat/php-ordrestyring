@@ -1,4 +1,6 @@
-<?php namespace LasseRafn\Ordrestyring\Requests;
+<?php
+
+namespace LasseRafn\Ordrestyring\Requests;
 
 use GuzzleHttp\Client;
 use LasseRafn\Ordrestyring\Models\Debtor;
@@ -8,15 +10,15 @@ use LasseRafn\Ordrestyring\Utils\RequestExtensions\CanUpdate;
 
 class DebtorRequest extends Request
 {
-	use CanUpdate, CanCreate;
+    use CanUpdate, CanCreate;
 
-	protected $modelClass = Debtor::class;
+    protected $modelClass = Debtor::class;
 
-	public function __construct( Client $client )
-	{
-		$this->endpoint   = Debtor::ENDPOINT;
-		$this->primaryKey = Debtor::PRIMARY_KEY;
+    public function __construct(Client $client)
+    {
+        $this->endpoint = Debtor::ENDPOINT;
+        $this->primaryKey = Debtor::PRIMARY_KEY;
 
-		parent::__construct( $client );
-	}
+        parent::__construct($client);
+    }
 }

@@ -1,4 +1,6 @@
-<?php namespace LasseRafn\Ordrestyring\Requests;
+<?php
+
+namespace LasseRafn\Ordrestyring\Requests;
 
 use GuzzleHttp\Client;
 use LasseRafn\Ordrestyring\Models\CaseItem;
@@ -8,15 +10,15 @@ use LasseRafn\Ordrestyring\Utils\RequestExtensions\CanUpdate;
 
 class CaseItemRequest extends Request
 {
-	use CanUpdate, CanCreate;
+    use CanUpdate, CanCreate;
 
-	protected $modelClass = CaseItem::class;
+    protected $modelClass = CaseItem::class;
 
-	public function __construct( Client $client )
-	{
-		$this->endpoint   = CaseItem::ENDPOINT;
-		$this->primaryKey = CaseItem::PRIMARY_KEY;
+    public function __construct(Client $client)
+    {
+        $this->endpoint = CaseItem::ENDPOINT;
+        $this->primaryKey = CaseItem::PRIMARY_KEY;
 
-		parent::__construct( $client );
-	}
+        parent::__construct($client);
+    }
 }
