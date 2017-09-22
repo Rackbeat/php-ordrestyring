@@ -115,7 +115,8 @@ class Ordrestyring
         return new DeliveryAddressRequest($this->client);
     }
 
-    public function getClient() {
+    public function getClient()
+    {
     	return $this->client;
     }
 }
