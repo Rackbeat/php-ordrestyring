@@ -23,27 +23,20 @@ class Model
 	{
 		$this->client = $client;
 
-		if ( $data === null )
-		{
+		if ( $data === null ) {
 			return;
 		}
 
-		if ( is_object( $data ) )
-		{
+		if ( is_object( $data ) ) {
 			$data = (array) $data;
 		}
 
-		if ( is_array( $data ) )
-		{
+		if ( is_array( $data ) ) {
 			$data = collect( $data );
 		}
 
-		$data->each( function ( $attribute, $key )
-		{
-			if ( in_array( (string) $key, $this->fillable, true ) )
-			{
-				$this->setAttribute( $key, $attribute );
-			}
+		$data->each( function ( $attribute, $key ) {
+			$this->setAttribute( $key, $attribute );
 		} );
 	}
 }
