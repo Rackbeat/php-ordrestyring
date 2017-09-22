@@ -6,7 +6,7 @@ trait SetsAttributes
 
 	private function setAttribute( $key, $value )
 	{
-		$key = trim($key);
+		$key = trim( $key );
 
 		$this->{$key} = $this->cast( $key, $value );
 	}
@@ -15,18 +15,15 @@ trait SetsAttributes
 	{
 		$formattedKey = ucfirst( camel_case( $key ) );
 
-		if ( method_exists($this, "set{$formattedKey}Attribute" ) )
-		{
-			return $this->{"set{$formattedKey}Attribute"}($value);
+		if ( method_exists( $this, "set{$formattedKey}Attribute" ) ) {
+			return $this->{"set{$formattedKey}Attribute"}( $value );
 		}
 
-		if ( $value === null || ! isset( $this->casts[ $key ] ) )
-		{
+		if ( $value === null || ! isset( $this->casts[ $key ] ) ) {
 			return $value;
 		}
 
-		switch ( $this->casts[ $key ] )
-		{
+		switch ( $this->casts[ $key ] ) {
 			case 'int':
 			case 'integer':
 				return (int) $value;
@@ -35,10 +32,10 @@ trait SetsAttributes
 				return (float) $value;
 
 			case 'date':
-				return date( 'Y-m-d', strtotime( $value ) );
+				return date( 'Y-m-d', $value );
 
 			case 'datetime':
-				return new \DateTime( strtotime( $value ) );
+				return new \DateTime( date( 'c', $value ) );
 
 			case 'double':
 			case 'decimal':
@@ -46,7 +43,7 @@ trait SetsAttributes
 
 			case 'bool':
 			case 'boolean':
-				return (bool) (is_int($value) ? $value === 1 : $value);
+				return (bool) ( is_int( $value ) ? $value === 1 : $value );
 
 			default:
 			case 'string':
