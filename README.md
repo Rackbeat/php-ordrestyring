@@ -43,12 +43,15 @@ $ordrestyring->departments()->where('number', '!=', 19)->all();
 $ordrestyring->debtors()->where('id', [1,2,3,4])->get(); // Will get debtors with id 1, 2, 3 and/or 4
 ````
 
-# Installation
+## Installation
 ````bash
 composer require lasserafn/php-ordrestyring
 ````
 
-# Usage
+## Usage
+
+First step is to get an API token for you Ordrestyring account by contacting Ordrestyring.
+
 ````php
 $ordrestyring = new LasseRafn\Ordrestyring\Ordrestyring('API-KEY');
 
