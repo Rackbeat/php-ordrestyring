@@ -4,6 +4,7 @@ namespace LasseRafn\Ordrestyring;
 
 use GuzzleHttp\Client;
 use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
+use LasseRafn\Ordrestyring\Requests\CreditorRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 use LasseRafn\Ordrestyring\Requests\PaymentTermRequest;
@@ -34,8 +35,9 @@ class Ordrestyring
         return new DebtorInvoiceRequest($this->client);
     }
 
-    public function creditors()
+    public function creditors():CreditorRequest
     {
+    	return new CreditorRequest( $this->client);
     }
 
     public function creditorInvoices()
