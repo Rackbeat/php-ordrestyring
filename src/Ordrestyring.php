@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
+use LasseRafn\Ordrestyring\Requests\PaymentTermRequest;
 
 class Ordrestyring
 {
@@ -49,8 +50,9 @@ class Ordrestyring
     {
     }
 
-    public function paymentTerms()
+    public function paymentTerms():PaymentTermRequest
     {
+    	return new PaymentTermRequest( $this->client);
     }
 
     public function debtorCategories()
