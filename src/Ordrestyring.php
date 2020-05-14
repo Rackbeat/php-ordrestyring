@@ -7,6 +7,7 @@ use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
 use LasseRafn\Ordrestyring\Requests\CreditorRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
+use LasseRafn\Ordrestyring\Requests\InternalGoodRequest;
 use LasseRafn\Ordrestyring\Requests\PaymentTermRequest;
 
 class Ordrestyring
@@ -48,8 +49,9 @@ class Ordrestyring
     {
     }
 
-    public function internalGoods()
+    public function internalGoods():InternalGoodRequest
     {
+    	return new InternalGoodRequest( $this->client);
     }
 
     public function paymentTerms():PaymentTermRequest
