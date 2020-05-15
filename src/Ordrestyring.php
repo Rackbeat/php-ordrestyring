@@ -42,7 +42,7 @@ class Ordrestyring
     	return new CreditorRequest( $this->client);
     }
 
-    public function creditorInvoices()
+    public function creditorInvoices():CreditorInvoiceRequest
     {
     	return new CreditorInvoiceRequest( $this->client);
     }
