@@ -8,6 +8,7 @@ use LasseRafn\Ordrestyring\Requests\CreditorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\CreditorRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
+use LasseRafn\Ordrestyring\Requests\DeliveryAddressRequest;
 use LasseRafn\Ordrestyring\Requests\InternalGoodRequest;
 use LasseRafn\Ordrestyring\Requests\PaymentTermRequest;
 use LasseRafn\Ordrestyring\Requests\UserRequest;
