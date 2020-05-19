@@ -10,6 +10,7 @@ use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorRequest;
 use LasseRafn\Ordrestyring\Requests\InternalGoodRequest;
 use LasseRafn\Ordrestyring\Requests\PaymentTermRequest;
+use LasseRafn\Ordrestyring\Requests\UserRequest;
 
 class Ordrestyring
 {
@@ -114,8 +115,12 @@ class Ordrestyring
     {
     }
 
-    public function user()
+	/**
+	 * @return UserRequest
+	 */
+    public function user(): UserRequest
     {
+    	return new UserRequest( $this->client);
     }
 
     public function deliveryAddresses()
