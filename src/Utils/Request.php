@@ -36,8 +36,10 @@ class Request extends RequestBuilder
      */
     public function find(int $id)
     {
+	    $this->buildRequest();
+
         $response = $this->getResponse(function () use ($id) {
-            return $this->client->get("{$this->endpoint}/{$id}");
+            return $this->client->get("{$this->endpoint}/{$id}{$this->urlParameters}");
         });
 
         return new $this->modelClass($this->client, $response);
