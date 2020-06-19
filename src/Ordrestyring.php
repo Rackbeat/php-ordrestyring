@@ -4,6 +4,7 @@ namespace LasseRafn\Ordrestyring;
 
 use GuzzleHttp\Client;
 use LasseRafn\Ordrestyring\Requests\CaseItemRequest;
+use LasseRafn\Ordrestyring\Requests\CaseMaterialRequest;
 use LasseRafn\Ordrestyring\Requests\CreditorInvoiceRequest;
 use LasseRafn\Ordrestyring\Requests\CreditorRequest;
 use LasseRafn\Ordrestyring\Requests\DebtorInvoiceRequest;
@@ -96,8 +97,12 @@ class Ordrestyring
     {
     }
 
-    public function caseMaterials()
+	/**
+	 * @return CaseMaterialRequest
+	 */
+    public function caseMaterials(): CaseMaterialRequest
     {
+    	return new CaseMaterialRequest( $this->client);
     }
 
     public function caseDocumentation()
