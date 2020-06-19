@@ -3,7 +3,6 @@
 namespace LasseRafn\Ordrestyring\Requests;
 
 use GuzzleHttp\Client;
-use LasseRafn\Ordrestyring\Models\Debtor;
 use LasseRafn\Ordrestyring\Models\User;
 use LasseRafn\Ordrestyring\Utils\Request;
 use LasseRafn\Ordrestyring\Utils\RequestExtensions\CanCreate;
@@ -13,7 +12,7 @@ class UserRequest extends Request
 {
     use CanUpdate, CanCreate;
 
-    protected $modelClass = Debtor::class;
+    protected $modelClass = User::class;
 
     public function __construct(Client $client)
     {

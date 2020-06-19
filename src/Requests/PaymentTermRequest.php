@@ -3,7 +3,6 @@
 namespace LasseRafn\Ordrestyring\Requests;
 
 use GuzzleHttp\Client;
-use LasseRafn\Ordrestyring\Models\Debtor;
 use LasseRafn\Ordrestyring\Models\PaymentTerm;
 use LasseRafn\Ordrestyring\Utils\Request;
 use LasseRafn\Ordrestyring\Utils\RequestExtensions\CanCreate;
