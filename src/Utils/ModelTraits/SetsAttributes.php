@@ -2,6 +2,9 @@
 
 namespace LasseRafn\Ordrestyring\Utils\ModelTraits;
 
+
+use Illuminate\Support\Str;
+
 trait SetsAttributes
 {
     protected $casts = [];
@@ -15,7 +18,7 @@ trait SetsAttributes
 
     private function cast($key, $value)
     {
-        $formattedKey = ucfirst(camel_case($key));
+        $formattedKey = ucfirst(Str::camel($key));
 
         if (method_exists($this, "set{$formattedKey}Attribute")) {
             return $this->{"set{$formattedKey}Attribute"}($value);
