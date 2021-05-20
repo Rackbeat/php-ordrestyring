@@ -39,6 +39,11 @@ class RequestBuilder
         return $this;
     }
 
+    public function getPage(): int
+    {
+        return $this->pageNumber;
+    }
+
     /**
      * Set amount of results per page
      * Their API documentation mentions nothing of a max.

@@ -54,20 +54,8 @@ class Request extends RequestBuilder
     {
         $this->page(1);
         $this->perPage(1);
-        $this->get();
 
-        $this->buildRequest();
-
-        /** @var array $response */
-        $response = $this->getResponse(function () {
-            return $this->client->get("{$this->endpoint}{$this->urlParameters}");
-        });
-
-        if (count($response) === 0) {
-            return;
-        }
-
-        return new $this->modelClass($this->client, $response[0]);
+        return $this->get()->first();
     }
 
     /**
@@ -79,7 +67,6 @@ class Request extends RequestBuilder
     {
         $this->buildRequest();
 
-        /** @var array $response */
         $response = $this->getResponse(function () {
             return $this->client->get("{$this->endpoint}{$this->urlParameters}");
         });
@@ -96,21 +83,50 @@ class Request extends RequestBuilder
      * This method will automatically paginate all rows,
      * and bypass any page attribute that has been set.
      *
+     * @param int $chunkSize
+     *
+     * @return \Generator
+     */
+    public function all(int $chunkSize = 20)
+    {
+        $this->page(1);
+        $this->perPage($chunkSize);
+
+        do {
+            $items = $this->get();
+
+            $countResults = count($items);
+            if ($countResults === 0) {
+                break;
+            }
+            // make a generator of the results and return them
+            // so the logic will handle them before the next iteration
+            // in order to avoid memory leaks
+            foreach ($items as $result) {
+                yield $result;
+            }
+
+            unset($items);
+
+            $this->page($this->getPage() + 1);
+        } while ($countResults === $chunkSize);
+    }
+
+    /**
+     * In some cases we return all data at once
+     *
      * @return Collection
      */
-    public function all()
+    public function allAtOnce()
     {
-        $this->buildRequest();
+        $generator = $this->all();
 
-        $response = $this->getResponse(function () {
-            return $this->client->get("{$this->endpoint}{$this->urlParameters}");
-        });
+        $data = collect();
+        foreach ($generator as $value) {
+            $data->push($value);
+        }
 
-        $items = collect($response);
-
-        return $items->map(function ($item) {
-            return new $this->modelClass($this->client, $item);
-        });
+        return $data;
     }
 
     protected function getResponse(callable $callable)

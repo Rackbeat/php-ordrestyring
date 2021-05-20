@@ -20,7 +20,7 @@ class Model
      * @param Client                          $client
      * @param null|array|Collection|\stdClass $data
      */
-    public function __construct(Client $client, $data)
+    public function __construct(Client $client = null, $data)
     {
         $this->client = $client;
 
