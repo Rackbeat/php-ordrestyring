@@ -108,6 +108,7 @@ class Request extends RequestBuilder
 
             unset($items);
 
+	    $this->urlParameters = '';
             $this->page($this->getPage() + 1);
         } while ($countResults === $chunkSize);
     }
